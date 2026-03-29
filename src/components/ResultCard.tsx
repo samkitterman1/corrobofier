@@ -83,19 +83,21 @@ export default function ResultCard({ result }: Props) {
             </div>
             {verdict !== 'no ai claims made' && (
               <div className="font-mono text-xs text-muted">
-                Official label: <span style={{ color }}>{label}</span>
+                Rating: <span style={{ color }}>{label}</span>
               </div>
             )}
           </div>
-          <button
-            onClick={() => setShowReportCard(true)}
-            className="font-mono text-xs px-3 py-1.5 bg-transparent transition-colors"
-            style={{ borderRadius: 0, color: '#f04a00' }}
-            onMouseEnter={e => { e.currentTarget.style.background = '#f04a00'; e.currentTarget.style.color = 'white' }}
-            onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#f04a00' }}
-          >
-            View Report Card
-          </button>
+          {verdict !== 'no ai claims made' && (
+            <button
+              onClick={() => setShowReportCard(true)}
+              className="font-mono text-xs px-3 py-1.5 bg-transparent transition-colors"
+              style={{ borderRadius: 0, color: '#f04a00' }}
+              onMouseEnter={e => { e.currentTarget.style.background = '#f04a00'; e.currentTarget.style.color = 'white' }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#f04a00' }}
+            >
+              View Report Card
+            </button>
+          )}
         </div>
       </div>
 

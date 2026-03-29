@@ -294,6 +294,7 @@ const dmMono = DM_Mono({ subsets: ['latin'], weight: ['400','500'], variable: '-
 - Company name: `brand`
 - Summary paragraph: `brand-light`
 - All other text: white
+- Footer shows `Claim level:` always; `Rating: [label]` and `View Report Card` button only when verdict ≠ `no ai claims made`
 
 **Report card (canvas-drawn):**
 - Background: `#f5c9a8` (salmon/peach)
@@ -303,8 +304,8 @@ const dmMono = DM_Mono({ subsets: ['latin'], weight: ['400','500'], variable: '-
 - "S.E. Searay" in italic Georgia beneath portrait with orange underline
 - Company name + date fields with orange underlines
 - Summary text in Georgia serif, sentence-truncated to fit available space
-- Large circled grade bottom-right, colour-coded by grade
-- "OFFICIAL RATING: [label]" in Courier New beneath grade
+- Large circled grade bottom-right, colour-coded by grade — omitted entirely when verdict is `no ai claims made`
+- "OFFICIAL RATING: [label]" in Courier New beneath grade — also omitted for `no ai claims made`
 - Download button exports as JPEG: `[CompanyName]_report_card.jpg`
 
 **Character widget (fixed bottom-right):**
@@ -377,7 +378,7 @@ import waterfineData from '@/public/animations/waterfine.json'
 - **Tech-only scope** — non-tech companies rejected with explanation card, not scored. Prevents mislabeling unrelated businesses as AI washers.
 - **Two-axis scoring** — claim level assessed independently from evidence score. Low score on a company that never claimed AI ≠ bad actor.
 - **Claim-aware D label** — "D for Duplicitous" only fires when claim_level is high or medium. Low/none claim companies with a D score get "Mostly Classic ML" — no accusation of deception.
-- **Score/grade suppression for non-claimers** — `no ai claims made` results do not display the score bar or grade letter in the UI, preventing neutral findings from looking like failures.
+- **Score/grade suppression for non-claimers** — `no ai claims made` results do not display the score bar, grade letter, "View Report Card" button, or grade circle on the canvas. The rating line in `ResultCard` uses the label `Rating:` (not `Official label:`). This prevents neutral findings from looking like failures.
 - **Prompt-level scoring guard** — the canonical prompt explicitly instructs Claude not to assign a score below 30 unless the company has confirmed AI claims (high/medium). Absence of AI evidence alone cannot produce a low score for a non-claiming company.
 - **30-day cache** — biggest cost lever. Repeat lookups cost nothing. ~$0.01–0.02 per fresh investigation at Sonnet 4 pricing ($3/$15 per million tokens).
 - **Max 2 web searches** — keeps most investigations under 20s. More searches caused 60–160s timeouts in the browser prototype.

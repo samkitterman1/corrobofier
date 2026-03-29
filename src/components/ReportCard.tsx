@@ -149,29 +149,31 @@ export default function ReportCard({ result, onClose }: Props) {
         ctx.font = 'bold 10px "Courier New"'
         ctx.fillText(`VERDICT: ${verdict.toUpperCase()}`, textX, H - 36)
 
-        // Grade circle — moved up to clear the border
-        const radius = 45
-        const circleX = W - 75
-        const circleY = H - 100  // raised so labels sit well above inner border
-        ctx.strokeStyle = color
-        ctx.lineWidth = 4
-        ctx.beginPath()
-        ctx.arc(circleX, circleY, radius, 0, Math.PI * 2)
-        ctx.stroke()
-        ctx.fillStyle = color
-        ctx.font = `bold ${grade.length > 1 ? '32' : '40'}px Georgia, serif`
-        const gradeMeasure = ctx.measureText(grade)
-        ctx.fillText(grade, circleX - gradeMeasure.width / 2, circleY + 13)
+        // Grade circle — only for companies with AI claims
+        if (verdict !== 'no ai claims made') {
+          const radius = 45
+          const circleX = W - 75
+          const circleY = H - 100  // raised so labels sit well above inner border
+          ctx.strokeStyle = color
+          ctx.lineWidth = 4
+          ctx.beginPath()
+          ctx.arc(circleX, circleY, radius, 0, Math.PI * 2)
+          ctx.stroke()
+          ctx.fillStyle = color
+          ctx.font = `bold ${grade.length > 1 ? '32' : '40'}px Georgia, serif`
+          const gradeMeasure = ctx.measureText(grade)
+          ctx.fillText(grade, circleX - gradeMeasure.width / 2, circleY + 13)
 
-        ctx.fillStyle = '#1a1a1f'
-        ctx.font = 'bold 8px "Courier New"'
-        const ratingText = 'OFFICIAL RATING:'
-        const ratingW = ctx.measureText(ratingText).width
-        ctx.fillText(ratingText, circleX - ratingW / 2, circleY + radius + 14)
-        ctx.fillStyle = color
-        ctx.font = 'bold 8px "Courier New"'
-        const labelW = ctx.measureText(label).width
-        ctx.fillText(label, circleX - labelW / 2, circleY + radius + 25)
+          ctx.fillStyle = '#1a1a1f'
+          ctx.font = 'bold 8px "Courier New"'
+          const ratingText = 'OFFICIAL RATING:'
+          const ratingW = ctx.measureText(ratingText).width
+          ctx.fillText(ratingText, circleX - ratingW / 2, circleY + radius + 14)
+          ctx.fillStyle = color
+          ctx.font = 'bold 8px "Courier New"'
+          const labelW = ctx.measureText(label).width
+          ctx.fillText(label, circleX - labelW / 2, circleY + radius + 25)
+        }
       }
     }
   }, [result])
