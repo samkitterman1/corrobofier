@@ -24,14 +24,23 @@ export default function IntroModal({ onDismiss }: Props) {
   if (!visible) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 overflow-y-auto">
       <div
-        className="max-w-md w-full p-8 flex flex-col gap-5"
+        className="max-w-md w-full p-8 flex flex-col gap-5 relative my-auto"
         style={{
           backgroundColor: '#f5c9a8',
           border: '8px solid #c03800',
         }}
       >
+        <button
+          onClick={dismiss}
+          className="absolute top-3 right-3 text-lg font-bold leading-none bg-transparent border-none cursor-pointer"
+          style={{ color: '#c03800', fontFamily: '"Courier New", monospace' }}
+          aria-label="Close"
+        >
+          ✕
+        </button>
+
         <p
           className="text-sm"
           style={{ fontFamily: '"Courier New", monospace', color: '#c03800', fontWeight: 'bold' }}
@@ -56,7 +65,7 @@ export default function IntroModal({ onDismiss }: Props) {
           className="text-sm leading-relaxed"
           style={{ fontFamily: 'Georgia, serif', color: '#1a1a1f' }}
         >
-          I&apos;m detective Steven Erwin Stingray, former head of the Sea.I.A&apos;s Biscayne Bay
+          I&apos;m Detective Sergeant Erwin Stingray of the Sea.I.A&apos;s Biscayne Bay
           office. I&apos;m on a mission to rid the ocean of (AI) knowledge pollution. You point me
           in the right direction, and I&apos;ll investigate.
         </p>
