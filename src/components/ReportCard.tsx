@@ -188,14 +188,14 @@ export default function ReportCard({ result, onClose }: Props) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 overflow-y-auto" onClick={onClose}>
       <div
-        className="relative flex flex-col items-center gap-4"
+        className="relative flex flex-col items-center gap-4 w-full max-w-2xl my-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <canvas
           ref={canvasRef}
-          className="max-w-full"
+          className="w-full h-auto"
           style={{ maxWidth: 640, border: '8px solid #c03800' }}
         />
         <div className="flex gap-3">

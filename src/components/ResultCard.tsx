@@ -81,7 +81,7 @@ export default function ResultCard({ result }: Props) {
             <div className="font-mono text-xs text-muted">
               Claim level: <span className="text-text">{result.claim_level}</span>
             </div>
-            {verdict !== 'no ai claims made' && (
+            {verdict !== 'no ai claims made' && label !== 'Official Ranking' && (
               <div className="font-mono text-xs text-muted">
                 Rating: <span style={{ color }}>{label}</span>
               </div>
